@@ -82,6 +82,17 @@
 
 <script th:inline="javascript">
 
+	$(window).load(function () {
+		
+		var msg = [[${msg}]];
+		
+		if(msg == 'success') {
+			alert("정상적으로 처리되었습니다.")
+		}
+		
+		var stateObj = { msg: ""};
+	})
+
 	$(document).ready(function() {
 		
 		var formObj = $("#f1");
@@ -91,6 +102,18 @@
 			e.preventDefault();
 			
 			formObj.find('[name="page"]').val( $(this).attr('href'));
+			
+			formObj.submit();
+		});
+		
+		$(".boardLink").click(function (e) {
+			
+			e.preventDefault();
+			
+			var boardNo = $(this).attr("href");
+			
+			formObj.attr("action",[[@{'/boards/view'}]]);
+			formObj.append("<input type='hidden' name='bno' value='" + boardNo + "'>" );
 			
 			formObj.submit();
 		});
@@ -105,29 +128,6 @@
 			formObj.find("[name='type']").val(typeStr);
 			formObj.find("[name='keyword']").val(keywordStr);
 			formObj.find("[name='page']").val("1");
-			formObj.submit();
-		});
-		
-		$(window).load(function () {
-			
-			var msg = [[${msg}]];
-			
-			if(msg == 'success') {
-				alert("정상적으로 처리되었습니다.")
-			}
-			
-			var stateObj = { msg: ""};
-		})
-		
-		$(".boardLink").click(function (e) {
-			
-			e.preventDefault();
-			
-			var boardNo = $(this).attr("href");
-			
-			formObj.attr("action",[[@{'/boards/view'}]]);
-			formObj.append("<input type='hidden' name='bno' value='" + boardNo + "'>" );
-			
 			formObj.submit();
 		});
 		
