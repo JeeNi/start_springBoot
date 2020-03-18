@@ -51,6 +51,13 @@ public class WebBoardRepositoryTests {
 		log.info("PAGE: " + result.getPageable());
 		
 		log.info("--------------");
+		
+		log.info("PageNumber: " + result.getPageable().getPageNumber());
+
+		log.info("TotalPages " + result.getTotalPages());
+
+		log.info("" + result.getPageable());
+		
 		result.getContent().forEach(board -> log.info("" + board));
 	}
 	
