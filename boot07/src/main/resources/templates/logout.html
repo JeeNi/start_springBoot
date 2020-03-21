@@ -1,0 +1,8 @@
+<h2>CUSTOM LOGOUT PAGE</h2>
+
+<form method="post">
+	<h3>Logout</h3>
+	<input type="hidden" th:name="${_csrf.parameterName}"
+		th:value="${_csrf.token}" />
+	<button type="submit" class="btn">LogOut</button>
+</form>
