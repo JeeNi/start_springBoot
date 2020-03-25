@@ -23,52 +23,45 @@ import lombok.extern.java.Log;
 @Log
 @Commit
 public class MemberTests {
-	
+
 	@Autowired
 	private MemberRepository repo;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	@Test
 	public void testInsert() {
-		
-		for(int i = 0; i <= 100; i++) {
-			
+
+		for (int i = 0; i <= 100; i++) {
+
 			Member member = new Member();
 			member.setUid("user" + i);
 			member.setUpw("pw" + i);
 			member.setUname("사용자" + i);
-			
+
 			MemberRole role = new MemberRole();
-			if(i <= 80) {
+			if (i <= 80) {
 				role.setRoleName("BASIC");
-			}else if(i <= 90) {
+			} else if (i <= 90) {
 				role.setRoleName("MANAGER");
-			}else {
+			} else {
 				role.setRoleName("ADMIN");
 			}
 			member.setRoles(Arrays.asList(role));
-			
+
 			repo.save(member);
 		}
-	}
-	
-	@Test
-	public void testRead() {
-		
-		Optional<Member> result = repo.findById("user85");
-		
-		result.ifPresent(member -> log.info("member" + member));
+
 	}
 	
 	@Test
 	public void testUpdateOldMember() {
-		
+
 		List<String> ids = new ArrayList<>();
 		
-		for(int i = 0; i <= 100; i++) {
-			
+		for (int i = 0; i <= 100; i++) {
+
 			ids.add("user"+i);
 		}
 		
@@ -78,6 +71,17 @@ public class MemberTests {
 			
 			repo.save(member);
 		});
+
+	}
+	
+
+	@Test
+	public void testRead() {
+
+		Optional<Member> result = repo.findById("user85");
+
+		result.ifPresent(member -> log.info("member"+ member));
+		
 	}
 
 }
